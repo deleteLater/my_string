@@ -104,23 +104,6 @@ namespace my_string {
 		int N = my_strlen(src);
 		int M = my_strlen(str);
 		int *next = new int[M] {0};
-		for (int p = 1,q = 0; p < M; p++) {
-			while (q > 0 && str[p] != str[q]) {
-				q = next[q-1];
-			}
-			if (str[p] == str[q])
-				q++;
-			next[p] = q;
-		}
-		int i = 0;
-		int j = 0;
-		while (j > 0 && src[i] != str[j]) {
 
-		}
 		delete next;
-		if (j == M)
-			return i - j;
-		else
-			return no_pos;
-	}
 }
