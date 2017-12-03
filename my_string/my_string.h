@@ -100,10 +100,23 @@ namespace my_string {
 		return (*eos == ch) ? 0 : no_pos;
 	}
 	
-	int my_strmat(const char* src, char *str) {
-		int N = my_strlen(src);
-		int M = my_strlen(str);
-		int *next = new int[M] {0};
+	int my_strmat(const char* txt, char *pat) {
+		int txt_len = my_strlen(txt);
+		int pat_len = my_strlen(pat);
+		int *next = my_space::caculateNext(pat);
+		int src_ptr = 0;
+		int pat_ptr = 0;
 
 		delete next;
+	}
+}
+
+namespace my_space {
+	int* caculateNext(char *pat) {
+		int pat_len = my_strlen(pat);
+		int *ret = new int[pat_len] {};
+		while(int i = 0)
+
+		return ret;
+	}
 }
