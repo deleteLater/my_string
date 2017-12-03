@@ -114,14 +114,8 @@ namespace my_string {
 		}
 		int i = 0;
 		int j = 0;
-		while (i < N && j < M) {
-			if (j == -1 || src[i] == str[j]) {
-				i++;
-				j++;
-			}
-			else {
-				j = next[j];
-			}
+		while (j > 0 && src[i] != str[j]) {
+
 		}
 		delete next;
 		if (j == M)
@@ -129,5 +123,4 @@ namespace my_string {
 		else
 			return no_pos;
 	}
-
 }
