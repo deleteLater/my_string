@@ -106,8 +106,18 @@ namespace my_string {
 		int *next = my_space::caculateNext(pat);
 		int src_ptr = 0;
 		int pat_ptr = 0;
-
-		delete next;
+		while (src_ptr < txt_len && pat_ptr < pat_len) {
+			if (pat_ptr == -1 || txt[src_ptr] == pat[pat_ptr]) {
+				src_ptr++;
+				pat_ptr++;
+			}
+			else {
+				pat_ptr = next[pat_ptr];
+			}
+		}
+		if (pat_ptr == pat_len)
+			return src_ptr - pat_ptr;
+		delete next;	//my_space::caculateNext(char *pat) function returns an arrayPtr on heap
 	}
 }
 
@@ -115,7 +125,6 @@ namespace my_space {
 	int* caculateNext(char *pat) {
 		int pat_len = my_strlen(pat);
 		int *ret = new int[pat_len] {};
-		while(int i = 0)
 
 		return ret;
 	}
