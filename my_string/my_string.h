@@ -101,6 +101,24 @@ namespace my_string {
 		return (*eos == ch) ? 0 : no_pos;
 	}
 
+	int my_strcmp(const char* f_str, const char* s_str) {
+		while (*f_str == *s_str && *f_str != '\0') {}
+		if (*f_str == '\0')
+			return 0;
+		return (*(unsigned char*)f_str > *(unsigned char*)s_str ? 1 : -1);
+	}
+
+	int my_strcmp(const char* f_str, const char* s_str) {
+	}
+
+	int my_strcmp_case(const char* f_str, const char* s_str) {
+		while (tolower(*f_str) == tolower(*s_str) && *f_str != '\0') {}
+		if (*f_str == '\0')
+			return 0;
+		return (tolower(*(unsigned char*)f_str) > tolower(*(unsigned char*)s_str) ? 1 : -1);
+	}
+
+	//KMP's nextArray
 	void caculateNext(const char* pat, int next[]) {
 		int pat_len = my_strlen(pat);
 		next[0] = -1;
@@ -142,5 +160,8 @@ namespace my_string {
 			return txt_ptr - pat_ptr;
 		else
 			return -1;
+	}
+
+	double my_strtod(const char* s) {
 	}
 }
