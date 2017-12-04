@@ -2,9 +2,17 @@
 
 #include <assert.h>
 
+namespace my_std {
+	int my_tolower(int c) {
+		if (c >= 'A' && c <= 'Z')
+			return (c + ('a' - 'A'));
+		return c;
+	}
+}
+
 namespace my_string {
 #define no_pos -1;	//0xffffffff
-
+	using namespace my_std;
 	//can deal with overlapMemory
 	char* my_memcpy(char* des, const char* src, size_t len) {
 		assert(des != nullptr && src != nullptr);
@@ -108,11 +116,15 @@ namespace my_string {
 		return (*(unsigned char*)f_str > *(unsigned char*)s_str ? 1 : -1);
 	}
 
-	int my_strcmp(const char* f_str, const char* s_str) {
+	int my_strcmp(const char* f_str, const char* s_str, size_t len) {
+		while (*f_str == *s_str && *f_str != '\0' && len--) {}
+		if (*f_str == '\0' || len)
+			return 0;
+		return (*(unsigned char*)f_str > *(unsigned char*)s_str ? 1 : -1);
 	}
 
 	int my_strcmp_case(const char* f_str, const char* s_str) {
-		while (tolower(*f_str) == tolower(*s_str) && *f_str != '\0') {}
+		while (my_tolower(*f_str) == my_tolower(*s_str) && *f_str != '\0') {}
 		if (*f_str == '\0')
 			return 0;
 		return (tolower(*(unsigned char*)f_str) > tolower(*(unsigned char*)s_str) ? 1 : -1);
