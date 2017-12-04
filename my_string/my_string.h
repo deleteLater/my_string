@@ -1,6 +1,7 @@
 #pragma once
 
 #include <assert.h>
+
 namespace my_string {
 #define no_pos -1;	//0xffffffff
 
@@ -100,11 +101,28 @@ namespace my_string {
 		return (*eos == ch) ? 0 : no_pos;
 	}
 
+	void caculateNext(char *pat, int next[]) {
+		int pat_len = my_strlen(pat);
+		next[0] = -1;
+
+		int k = -1;
+		int pat_ptr = 0;
+		while (pat_ptr < pat_len - 1) {
+			if (k == -1 || pat[pat_ptr] == pat[k]) {
+				k++;
+				pat_ptr++;
+				next[pat_ptr] = k;
+			}
+			else {
+				k = next[pat_ptr];
+			}
+		}
+	}
 	int my_strmat(const char* txt, char *pat) {
 		int txt_len = my_strlen(txt);
 		int pat_len = my_strlen(pat);
 		int *next = new int[pat_len];
-		my_space::caculateNext(pat, next);	//init nextArray
+		caculateNext(pat, next);	//init nextArray
 		int src_ptr = 0;
 		int pat_ptr = 0;
 		while (src_ptr < txt_len && pat_ptr < pat_len) {
@@ -116,28 +134,10 @@ namespace my_string {
 				pat_ptr = next[pat_ptr];
 			}
 		}
+		delete next;
 		if (pat_ptr == pat_len)
 			return src_ptr - pat_ptr;
-		delete next;	//my_space::caculateNext(char *pat) function returns an arrayPtr on heap
-	}
-}
-
-namespace my_space {
-	void* caculateNext(char *pat, int next[]) {
-		int pat_len = my_strlen(pat);
-		next[0] = -1;
-
-		int k = -1;
-		int pat_ptr = 0;
-		while (pat_ptr < pat_len - 1) {
-			if (k == -1 || next[pat_ptr] == next[k]) {
-				k++;
-				pat_ptr++;
-				next[pat_ptr] = k;
-			}
-			else {
-				k = next[pat_ptr];
-			}
-		}
+		else
+			return -1;
 	}
 }
