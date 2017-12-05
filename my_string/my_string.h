@@ -19,6 +19,7 @@ namespace my_std {
 namespace my_string {
 	int no_pos = -1;	//0xffffffff
 	using namespace my_std;
+
 	//can deal with overlapMemory
 	char* my_memcpy(char* des, const char* src, size_t len) {
 		assert(des != nullptr && src != nullptr);
@@ -185,18 +186,4 @@ namespace my_string {
 		else
 			return -1;
 	}
-
-	double my_strtod(const char* s) {
-		double _ret = 0.0;
-		int _int = 0;
-		double _dec = 0.0;
-		int dotPos = my_strchr(s, '.');
-		if (dotPos == my_string::no_pos) {
-			while (*s != '\0') {
-				_int = _int * 10 + (*s - 48);
-			}
-			return (double)_int;
-		}
-		else {
-		}
-	}
+}
