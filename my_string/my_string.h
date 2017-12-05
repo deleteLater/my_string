@@ -4,14 +4,20 @@
 
 namespace my_std {
 	int my_tolower(int c) {
+		//for ASCII Codec
 		if (c >= 'A' && c <= 'Z')
 			return (c + ('a' - 'A'));
 		return c;
 	}
+	bool my_isDigit(char ch) {
+		if (ch >= '0' && ch <= '9')
+			return true;
+		return false;
+	}
 }
 
 namespace my_string {
-#define no_pos -1;	//0xffffffff
+	int no_pos = -1;	//0xffffffff
 	using namespace my_std;
 	//can deal with overlapMemory
 	char* my_memcpy(char* des, const char* src, size_t len) {
@@ -116,7 +122,7 @@ namespace my_string {
 		return (*(unsigned char*)f_str > *(unsigned char*)s_str ? 1 : -1);
 	}
 
-	int my_strcmp(const char* f_str, const char* s_str, size_t len) {
+	int my_strncmp(const char* f_str, const char* s_str, size_t len) {
 		while (*f_str == *s_str && *f_str != '\0' && len--) {}
 		if (*f_str == '\0' || len)
 			return 0;
@@ -127,9 +133,15 @@ namespace my_string {
 		while (my_tolower(*f_str) == my_tolower(*s_str) && *f_str != '\0') {}
 		if (*f_str == '\0')
 			return 0;
-		return (tolower(*(unsigned char*)f_str) > tolower(*(unsigned char*)s_str) ? 1 : -1);
+		return (my_tolower(*(unsigned char*)f_str) > my_tolower(*(unsigned char*)s_str) ? 1 : -1);
 	}
 
+	int my_strncmp_case(const char* f_str, const char* s_str, size_t len) {
+		while (my_tolower(*f_str == my_tolower(*s_str)) && *f_str != '\0' && len--) {}
+		if (*f_str == '\0' || len)
+			return 0;
+		return (my_tolower(*(unsigned char*)f_str) > my_tolower(*(unsigned char*)s_str) ? 1 : -1);
+	}
 	//KMP's nextArray
 	void caculateNext(const char* pat, int next[]) {
 		int pat_len = my_strlen(pat);
@@ -175,5 +187,16 @@ namespace my_string {
 	}
 
 	double my_strtod(const char* s) {
+		double _ret = 0.0;
+		int _int = 0;
+		double _dec = 0.0;
+		int dotPos = my_strchr(s, '.');
+		if (dotPos == my_string::no_pos) {
+			while (*s != '\0') {
+				_int = _int * 10 + (*s - 48);
+			}
+			return (double)_int;
+		}
+		else {
+		}
 	}
-}
