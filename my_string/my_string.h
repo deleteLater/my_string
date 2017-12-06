@@ -1,5 +1,6 @@
 #pragma once
-
+// my_string.h: defines some stringOperations
+// https://github.com/deleteLater/my_string
 #include <assert.h>
 
 namespace my_std {
