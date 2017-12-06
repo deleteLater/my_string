@@ -117,28 +117,28 @@ namespace my_string {
 	}
 
 	int my_strcmp(const char* f_str, const char* s_str) {
-		while (*f_str == *s_str && *f_str != '\0') {}
+		while (*f_str++ == *s_str++ && *f_str != '\0') {}
 		if (*f_str == '\0')
 			return 0;
 		return (*(unsigned char*)f_str > *(unsigned char*)s_str ? 1 : -1);
 	}
 
 	int my_strncmp(const char* f_str, const char* s_str, size_t len) {
-		while (*f_str == *s_str && *f_str != '\0' && len--) {}
-		if (*f_str == '\0' || len)
+		while (*f_str++ == *s_str++ && *f_str != '\0' && len--) {}
+		if (*f_str == '\0' && !len)
 			return 0;
 		return (*(unsigned char*)f_str > *(unsigned char*)s_str ? 1 : -1);
 	}
 
 	int my_strcmp_case(const char* f_str, const char* s_str) {
-		while (my_tolower(*f_str) == my_tolower(*s_str) && *f_str != '\0') {}
+		while (my_tolower(*f_str++) == my_tolower(*s_str++) && *f_str != '\0') {}
 		if (*f_str == '\0')
 			return 0;
 		return (my_tolower(*(unsigned char*)f_str) > my_tolower(*(unsigned char*)s_str) ? 1 : -1);
 	}
 
 	int my_strncmp_case(const char* f_str, const char* s_str, size_t len) {
-		while (my_tolower(*f_str == my_tolower(*s_str)) && *f_str != '\0' && len--) {}
+		while (my_tolower(*f_str++) == my_tolower(*s_str++) && *f_str != '\0' && len--) {}
 		if (*f_str == '\0' || len)
 			return 0;
 		return (my_tolower(*(unsigned char*)f_str) > my_tolower(*(unsigned char*)s_str) ? 1 : -1);
